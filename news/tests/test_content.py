@@ -4,7 +4,7 @@ from django.test import TestCase
 from django.urls import reverse
 
 from news.models import News
-from datetime import datetime, timedelta
+from datetime import timedelta
 from django.utils import timezone 
 from django.contrib.auth import get_user_model
 from news.forms import CommentForm
