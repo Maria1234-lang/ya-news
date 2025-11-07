@@ -5,6 +5,13 @@ from django.urls import reverse
 
 from news.models import News
 from datetime import datetime, timedelta
+from django.utils import timezone 
+from django.contrib.auth import get_user_model
+from news.forms import CommentForm
+from news.models import Comment, News
+
+# Получаем модель пользователя
+User = get_user_model()
 
 
 class TestHomePage(TestCase):
@@ -13,7 +20,8 @@ class TestHomePage(TestCase):
     @classmethod
     def setUpTestData(cls):
         # Вычисляем текущую дату.
-        today = datetime.today()
+        # today = datetime.today()
+        today =  timezone.now()
         all_news = [
             News(
                 title=f'Новость {index}',
@@ -58,7 +66,7 @@ class TestDetailPage(TestCase):
         cls.detail_url = reverse('news:detail', args=(cls.news.id,))
         cls.author = User.objects.create(username='Комментатор')
         # Запоминаем текущее время:
-        now = datetime.now()
+        now =  timezone.now()
         # Создаём комментарии в цикле.
         for index in range(10):
             # Создаём объект и записываем его в переменную.
